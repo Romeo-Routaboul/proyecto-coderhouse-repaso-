@@ -1,0 +1,33 @@
+{% extends 'appcoder/base.html' %}
+
+{% block contenido %}
+
+<h1>Cursos disponibles</h1>
+<p>Estos son los cursos que todavia tienen vacantes</p>
+
+
+<form method="post">
+    {% csrf_token %}
+    {{ formulario.as_p }}
+    <input type="submit" value="Crear curso">
+
+</form>
+
+
+{% if listado_cursos %}
+
+    <ul>
+        {% for curso in listado_cursos %}
+            <li>{{curso}} <a href="{% url 'coder-cursos-borrar'  curso.id %}">Borrar</a> <a href="{% url 'coder-cursos-editar'  curso.id %}">Editar</a></li>
+        
+    </ul>
+        {% endfor %}
+
+{% else %}
+    <p>No hay cursos disponibles</p>
+
+{% endif %}
+
+
+{% endblock %}
+

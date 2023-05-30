@@ -1,0 +1,17 @@
+{% extends 'appcoder/base.html' %}
+
+{% block contenido %}
+
+<form method="post">
+    {% csrf_token %}
+    <p>
+        Seguro que quieres borrar este profesor: {{profesor.nombre}} {{profesor.apellido}}?
+        <input type="submit" value="Borrar">
+    </p>
+
+    <a href="{% url 'coder-profesores' %}">Volver atras</a>
+
+</form>
+
+
+{% endblock %}

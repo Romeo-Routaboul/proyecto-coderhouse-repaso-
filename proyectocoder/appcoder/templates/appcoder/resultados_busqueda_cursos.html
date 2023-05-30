@@ -1,0 +1,12 @@
+{% extends 'appcoder/base.html' %}
+
+{% block contenido %}
+<ul>
+    {% for curso in cursos %}
+        <li>{{curso.nombre}} - Camada: {{curso.camada}} </li>
+
+    {% endfor %}
+
+</ul>
+
+{% endblock %}

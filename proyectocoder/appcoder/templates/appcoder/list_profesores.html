@@ -1,0 +1,23 @@
+{% extends 'appcoder/base.html' %}
+
+{% block contenido %}
+
+<h1>Profesores Disponibles</h1>
+
+<ul>
+    {% for profesor in object_list %}
+    <li>
+        {{ profesor.nombre }} {{profesor.apellido}} -
+         <a href="{% url 'coder-profesor-update' profesor.id %}">Editar</a> -
+         <a href="{% url 'coder-profesor-delete' profesor.id %}">Borrar</a> -
+         <a href="{% url 'coder-profesor-detail' profesor.id %}">Detalle</a>
+    </li>
+    {% endfor %}
+
+</ul>
+
+<a href="{% url 'coder-profesor-crear' %}">Crear Profesor</a>
+
+
+
+{% endblock %}
