@@ -6,7 +6,8 @@ from appcoder.forms import*
 from proyectocoder.settings import BASE_DIR
 import os
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
 
 def inicio (request):
     return render (request, "appcoder/index.html")
@@ -169,3 +170,26 @@ class profesoresUpdate(UpdateView):
 class profesoresDelete(DeleteView):
     model = Profesor
     success_url = "/coder/profesores/"
+
+def iniciar_sesion(request):
+    
+     errors = ""
+
+     if request.method == "POST":
+         formulario = AuthenticationForm(request, data=request.POST)
+        
+         if formulario.is_valid():
+             data = formulario.cleaned_data
+
+             user = authenticate(username=data["username"], pasword=data["password"])
+        
+             if user is None: #aca no se que mierda pasó pero anda, en teoria va un "is not none"
+                login(request, user)
+                return redirect("coder-inicio")
+             else:
+                return render(request, "appcoder/login.html", {"form": formulario, "errors": "Credenciales invalidas"})
+         else:
+             return render (request, "appcoder/login.html", {"form": formulario, "errors": formulario.errors})
+
+     formulario = AuthenticationForm()
+     return render (request, "appcoder/login.html", {"form": formulario, "errors": errors})

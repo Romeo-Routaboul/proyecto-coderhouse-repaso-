@@ -22,4 +22,5 @@ path("profesores/detalle/<pk>/",profesoresDetail.as_view() , name="coder-profeso
 path("profesores/actualizar/<pk>/",profesoresUpdate.as_view() , name="coder-profesor-update"),
 path("profesores/borrar/<pk>/",profesoresDelete.as_view() , name="coder-profesor-delete"),
 path("profesores/crear/", profesoresCreate.as_view(), name="coder-profesor-crear"),
+path("login/", iniciar_sesion, name="auth-login"),
 ]
