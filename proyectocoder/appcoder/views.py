@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from appcoder.models import*
 from appcoder.forms import*
 
+
 from proyectocoder.settings import BASE_DIR
 import os
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -193,3 +194,20 @@ def iniciar_sesion(request):
 
      formulario = AuthenticationForm()
      return render (request, "appcoder/login.html", {"form": formulario, "errors": errors})
+
+def registrar_ususario(request):
+
+    if request.method == "POST":
+        formulario = UserRegisterForm(request.POST)
+        
+        if formulario.is_valid():
+
+            formulario.save()
+            return redirect ("coder-inicio")
+        
+        else:
+            return render (request, "appcoder/register.html", {"form": formulario, "errors": formulario.errors})
+
+
+    formulario = UserRegisterForm()
+    return render(request, "appcoder/register.html", {"form": formulario})

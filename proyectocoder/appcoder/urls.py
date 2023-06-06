@@ -23,4 +23,5 @@ path("profesores/actualizar/<pk>/",profesoresUpdate.as_view() , name="coder-prof
 path("profesores/borrar/<pk>/",profesoresDelete.as_view() , name="coder-profesor-delete"),
 path("profesores/crear/", profesoresCreate.as_view(), name="coder-profesor-crear"),
 path("login/", iniciar_sesion, name="auth-login"),
+path("register/", registrar_ususario, name="auth-register"),
 ]
